@@ -9,6 +9,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// This will import the routes from the main index.js file in the root of the routes directory.
 app.use(routes);
 
 // This is an event listener for the open event of the database connection.
