@@ -18,7 +18,7 @@ const userSchema = new Schema({
     thoughts: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'thought',
+            ref: 'thoughts',
         }
     ],
     friends: [
@@ -27,7 +27,14 @@ const userSchema = new Schema({
             ref: 'user',
         }
     ],
-})
+},
+{
+    toJSON: {
+      virtuals: true,
+      getters: true,
+    },
+}
+);
 
 // This creates a virtual property called friendCount on the userSchema.
 // It uses a getter function that retrieves the length of the user's friends array, providing a count for the number of friends a user has.
