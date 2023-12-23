@@ -36,7 +36,7 @@ userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
-
+// This initializes the User model and creates a collection named user using the schema defined.
 const User = model('user', userSchema);
 
 module.exports = User;
