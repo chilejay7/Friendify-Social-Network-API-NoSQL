@@ -6,6 +6,7 @@ const PORT = 7075;
 const app = express();
 
 // Middleware is defined to handle and parse incoming data requests.
+// If we do not include the middleware to parse data, it won't be available in the request.body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

@@ -7,13 +7,13 @@ const userSchema = new Schema({
     username: {
         type: String,
         unique: true,
-        required: true,
+        required: [true, 'A username is required'],
         trim: true,
     },
     email: {
         type: String,
         unique: true,
-        required: true,
+        required: [true, 'An email address is required'],
     },
     thoughts: [
         {
