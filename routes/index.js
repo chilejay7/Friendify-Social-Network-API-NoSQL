@@ -8,7 +8,11 @@ router.use('/api', apiRoutes);
 
 router.get('/', (req, res) => {
     console.log('The routes are working');
-    // res.send(`Thanks for visiting`);
+    res.status(200).send(`Thanks for visiting!`);
+});
+
+router.use((req, res) => {
+    res.send('Invalid route');
 })
 
 module.exports = router;
