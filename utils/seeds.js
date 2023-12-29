@@ -8,8 +8,8 @@ connection.once('open', async () => {
     console.log('The database connection is open');
 
     // The code that follows will check to see if the colletions specified already exist.  If they do, they will be dropped.  There is a check for both user and thoughts.
-    let userCheck = await connection.db.listCollections({ name: 'user' }).toArray();
-    userCheck.length ? await connection.dropCollection('user') : console.log('user collection does not exist');
+    let userCheck = await connection.db.listCollections({ name: 'users' }).toArray();
+    userCheck.length ? await connection.dropCollection('users') : console.log('user collection does not exist');
 
     let thoughtCheck = await connection.db.listCollections({ name: 'thoughts' }).toArray();
     thoughtCheck.length ? await connection.dropCollection('thoughts') : console.log('thoughts collection does not exist');
