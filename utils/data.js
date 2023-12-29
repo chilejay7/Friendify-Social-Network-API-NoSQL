@@ -64,7 +64,7 @@ const createThoughts = (num) => {
         thoughtData.push({
             thoughtText: getRandomItem(thoughtStatements),
             username: getRandomItem(usernames),
-            reactions: [generateReactions(2)],
+            reactions: generateReactions(2),
         })
     }
     return thoughtData;
