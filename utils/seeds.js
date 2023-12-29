@@ -1,6 +1,6 @@
 const connection = require('../config/connection');
 const { Reaction, Thought, User } = require('../models');
-const { users, getRandomItem } = require('./data');
+const { users, createThoughts } = require('./data');
 
 connection.on('error', (err) => err);
 
@@ -16,9 +16,11 @@ connection.once('open', async () => {
 
     await User.collection.insertMany(users);
 
-    await Thought.collection.insertMany()
+    const newThoughts = createThoughts(10);
+
+    await Thought.collection.insertMany(newThoughts);
 
     console.table(users);
-
+    console.table(newThoughts);
 })
 

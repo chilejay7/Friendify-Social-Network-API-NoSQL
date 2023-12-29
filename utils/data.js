@@ -70,4 +70,4 @@ const createThoughts = (num) => {
     return thoughtData;
 }
 
-module.exports = { users, getRandomItem, generateReactions };
+module.exports = { users, createThoughts };
