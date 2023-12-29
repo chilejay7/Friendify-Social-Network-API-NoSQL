@@ -1,12 +1,13 @@
 const connection = require('../config/connection');
 const { Reaction, Thought, User } = require('../models');
-const { users } = require('./data');
+const { users, createThoughts } = require('./data');
 
 connection.on('error', (err) => err);
 
 connection.once('open', async () => {
     console.log('The database connection is open');
 
+    // The code that follows will check to see if the colletions specified already exist.  If they do, they will be dropped.  There is a check for both user and thoughts.
     let userCheck = await connection.db.listCollections({ name: 'user' }).toArray();
     userCheck.length ? await connection.dropCollection('user') : console.log('user collection does not exist');
 
@@ -15,7 +16,11 @@ connection.once('open', async () => {
 
     await User.collection.insertMany(users);
 
-    console.table(users);
+    const newThoughts = createThoughts(10);
 
+    await Thought.collection.insertMany(newThoughts);
+
+    console.table(users);
+    console.table(newThoughts);
 })
 
