@@ -10,4 +10,8 @@ module.exports = {
         const thought = await Thought.findOne({ _id: id });
         res.json(thought);
     },
+    async createThought(req, res) {
+        const newThought = await Thought.create(req.body);
+        res.json(newThought);
+    }
 }
