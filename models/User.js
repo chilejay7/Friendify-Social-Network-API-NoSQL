@@ -52,9 +52,9 @@ userSchema.virtual('friendCount').get(function () {
 // This initializes the User model and creates a collection named user using the schema defined.
 const User = model('user', userSchema);
 
-const testy = new User({username: "testy", email: "testyemail@newemail.com"});
-testy.save()
-.then(data => console.log(data))
-.catch(err => console.log(err.message))
+// const testy = new User({username: "testy", email: "testyemail@newemail.com"});
+// testy.save()
+// .then(data => console.log(data))
+// .catch(err => console.log(err.message))
 
 module.exports = User;

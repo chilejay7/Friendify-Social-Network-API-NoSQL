@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const userRoutes = require('./userRoutes');
+
+router.use('/users', userRoutes);
 
 // This GET route will respond to requests sent to the /api root route.
 router.get('/', (req, res) => {
