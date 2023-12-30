@@ -14,6 +14,12 @@ const userSchema = new Schema({
         type: String,
         unique: true,
         required: [true, 'An email address is required'],
+        validate: {
+            validator: (value) => {
+               return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            },
+            message: 'Please provide a valid email address.',
+        },
     },
     thoughts: [
         {
@@ -45,5 +51,10 @@ userSchema.virtual('friendCount').get(function () {
 
 // This initializes the User model and creates a collection named user using the schema defined.
 const User = model('user', userSchema);
+
+const testy = new User({username: "testy", email: "testyemail@newemail.com"});
+testy.save()
+.then(data => console.log(data))
+.catch(err => console.log(err.message))
 
 module.exports = User;
