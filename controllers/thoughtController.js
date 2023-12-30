@@ -13,5 +13,15 @@ module.exports = {
     async createThought(req, res) {
         const newThought = await Thought.create(req.body);
         res.json(newThought);
+    },
+    async updateThought(req, res) {
+        const { id } = req.params;
+        const thought = await Thought.findOneAndUpdate(
+            { _id: id },
+            { $set: req.body },
+            { runValidators: true, new: true },
+        );
+
+        res.json(thought);
     }
 }

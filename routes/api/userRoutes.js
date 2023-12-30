@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getUsers, getOneUser, createUser } = require('../../controllers/userController');
+const { getUsers, getOneUser, createUser, updateUser } = require('../../controllers/userController');
 
 // This route uses a find query to retrieve all users in the database.
 router.route('/')
@@ -7,6 +7,8 @@ router.route('/')
 .post(createUser);
 
 // This route uses the _id of a specific document to retrieve one specific user from the database.
-router.route('/:id').get(getOneUser);
+router.route('/:id')
+.get(getOneUser)
+.put(updateUser);
 
 module.exports = router;

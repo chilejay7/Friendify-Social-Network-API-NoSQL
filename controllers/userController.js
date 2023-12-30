@@ -8,10 +8,29 @@ module.exports = {
     async getOneUser(req, res) {
         const { id } = req.params;
         const user = await User.findOne({ _id: id });
+        if(!user) {
+            return res.status(404)
+            .json({message: 'A user with that id does not exist.  Please enter another id.'})
+        }
         res.json(user);
     },
     async createUser(req, res) {
         const newUser = await User.create(req.body);
         res.json(newUser);
-    }
+    },
+    async updateUser(req, res) {
+        const { id } = req.params;
+        const user = await User.findOneAndUpdate(
+            { _id: id },
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
+
+        if (!user) {
+            return res.status(404)
+            .json({message: 'A user with that id does not exist.  Please enter another id.'})
+        }
+
+        res.json(user);
+    },
 }
