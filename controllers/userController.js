@@ -9,5 +9,9 @@ module.exports = {
         const { id } = req.params;
         const user = await User.findOne({ _id: id });
         res.json(user);
+    },
+    async createUser(req, res) {
+        const newUser = await User.create(req.body);
+        res.json(newUser);
     }
 }

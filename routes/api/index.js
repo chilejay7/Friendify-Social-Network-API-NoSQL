@@ -5,10 +5,10 @@ const thoughtRoutes = require('./thoughtRoutes');
 router.use('/users', userRoutes);
 router.use('/thoughts', thoughtRoutes);
 
-// This GET route will respond to requests sent to the /api root route.
+// This GET route will respond to requests sent to the /api root route.  This route was only developed for testing purposes.
 router.get('/', (req, res) => {
     console.log(`API routes are working`);
     res.status(200).send(`Thanks for visiting the API!`);
-})
+});
 
 module.exports = router;
