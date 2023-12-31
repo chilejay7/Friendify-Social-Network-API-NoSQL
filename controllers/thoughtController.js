@@ -23,5 +23,10 @@ module.exports = {
         );
 
         res.json(thought);
+    },
+    async deleteThought(req, res) {
+        const { id } = req.params;
+        const thought = await Thought.findOneAndDelete({ _id: id });
+        res.json({ message: 'Thought deleted from the database.'})
     }
 }

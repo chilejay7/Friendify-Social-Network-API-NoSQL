@@ -33,4 +33,9 @@ module.exports = {
 
         res.json(user);
     },
+    async deleteUser(req, res) {
+        const { id } = req.params;
+        const user = await User.findOneAndDelete({ _id: id });
+        res.json({message: 'User deleted from the database.'});
+    },
 }
