@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getThoughts, getOneThought, createThought, updateThought, deleteThought, addThoughtResponse } = require('../../controllers/thoughtController');
+const { getThoughts, getOneThought, createThought, updateThought, deleteThought, addThoughtReaction } = require('../../controllers/thoughtController');
 
 // This route uses a find query to retrieve all thoughts in the database.
 router.route('/')
@@ -13,6 +13,6 @@ router.route('/:id')
 .delete(deleteThought);
 
 // This is a separate route for creating reactions on thoughts.
-router.route('/:id/reactions').post(addThoughtResponse);
+router.route('/:id/reactions').post(addThoughtReaction);
 
 module.exports = router;
