@@ -28,5 +28,15 @@ module.exports = {
         const { id } = req.params;
         const thought = await Thought.findOneAndDelete({ _id: id });
         res.json({ message: 'Thought deleted from the database.'})
+    },
+    async addThoughtReaction(req, res) {
+        const { id } = req.params;
+        const thought = await Thought.findOneAndUpdate(
+            { _id: id },
+            { $addToSet: { reactions: req.body } },
+            { runValidators: true, new: true }
+        );
+
+        res.json(thought);
     }
 }
