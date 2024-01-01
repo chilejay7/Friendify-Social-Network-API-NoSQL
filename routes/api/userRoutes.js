@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getUsers, getOneUser, createUser, updateUser, deleteUser } = require('../../controllers/userController');
+const { getUsers, getOneUser, createUser, updateUser, deleteUser, addFriend } = require('../../controllers/userController');
 
 // This route uses a find query to retrieve all users in the database.
 router.route('/')
@@ -11,5 +11,8 @@ router.route('/:id')
 .get(getOneUser)
 .put(updateUser)
 .delete(deleteUser);
+
+// This route will allow a friend to be added to a specific user's document.
+router.route('/:id/addFriend').post(addFriend);
 
 module.exports = router;
