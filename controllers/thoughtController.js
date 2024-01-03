@@ -43,7 +43,7 @@ module.exports = {
         const { thoughtId, reactionId } = req.params;
         const thought = await Thought.findOneAndUpdate(
             { _id: thoughtId },
-            { $pull: { reactions: { reactionId: reactionId } } },
+            { $pull: { reactions: { username: reactionId } } },
             { runValidators: true, new: true }
         )
         
