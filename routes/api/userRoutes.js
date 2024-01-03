@@ -15,6 +15,8 @@ router.route('/:id')
 // This route will allow a friend to be added to a specific user's document.
 router.route('/:id/friends')
 .post(addFriend)
+
+router.route('/:id/friends/:friendId')
 .delete(removeFriend);
 
 module.exports = router;
