@@ -16,7 +16,8 @@ router.route('/:id')
 router.route('/:id/friends')
 .post(addFriend)
 
-router.route('/:id/friends/:friendId')
+// This route was added to remove friends from a user's friends list arrray.
+router.route('/:userId/friends/:friendId')
 .delete(removeFriend);
 
 module.exports = router;
