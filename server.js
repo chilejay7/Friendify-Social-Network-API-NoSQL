@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./config/connection');
 const routes = require('./routes');
+const morgan = require('morgan');
 
 const PORT = 7075;
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 // If we do not include the middleware to parse data, it won't be available in the request.body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(morgan('dev'));
 
 // This will import the routes from the main index.js file in the root of the routes directory.
 app.use(routes);
