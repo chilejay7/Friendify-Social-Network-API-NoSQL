@@ -47,5 +47,15 @@ module.exports = {
         );
 
         res.json(user);
+    },
+    async removeFriend(req, res) {
+        const { id } = req.params;
+        const user = await User.findOneAndUpdate(
+            { _id: id },
+            { $pull: { friends: { ObjectId: req.body } } },
+            { runValidators: true, new: true }
+        )
+
+        res.json(user)
     }
 }
