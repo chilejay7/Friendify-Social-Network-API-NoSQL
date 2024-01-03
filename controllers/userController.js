@@ -38,4 +38,24 @@ module.exports = {
         const user = await User.findOneAndDelete({ _id: id });
         res.json({message: 'User deleted from the database.'});
     },
+    async addFriend(req, res) {
+        const { id } = req.params;
+        const user = await User.findOneAndUpdate(
+            { _id: id },
+            { $addToSet: { friends: req.body }},
+            { runValidators: true, new: true }
+        );
+
+        res.json(user);
+    },
+    async removeFriend(req, res) {
+        const { userId, friendId } = req.params;
+        const user = await User.findOneAndUpdate(
+            { _id: userId },
+            { $pull: { friends: friendId } },
+            { runValidators: true, new: true }
+        )
+
+        res.json(user)
+    }
 }

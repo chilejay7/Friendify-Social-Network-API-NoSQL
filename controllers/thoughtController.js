@@ -38,5 +38,15 @@ module.exports = {
         );
 
         res.json(thought);
+    },
+    async removeReactions(req, res) {
+        const { thoughtId, reactionId } = req.params;
+        const thought = await Thought.findOneAndUpdate(
+            { _id: thoughtId },
+            { $pull: { reactions: { username: reactionId } } },
+            { runValidators: true, new: true }
+        )
+        
+        res.json(thought);
     }
 }
