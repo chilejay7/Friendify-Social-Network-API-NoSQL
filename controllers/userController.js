@@ -1,61 +1,99 @@
 const User = require('../models/User');
 
 module.exports = {
+    // The find() method returns all documents in a given collection.
     async getUsers(req, res) {
-        const users = await User.find();
-        res.json(users);
+        try {
+            const users = await User.find();
+            res.json(users);
+        } catch (err) {
+            res.status(500).json(err);
+        }
     },
     async getOneUser(req, res) {
-        const { id } = req.params;
-        const user = await User.findOne({ _id: id });
-        if(!user) {
-            return res.status(404)
-            .json({message: 'A user with that id does not exist.  Please enter another id.'})
+        try {
+            const { id } = req.params;
+            const user = await User.findOne({ _id: id });
+            if (!user) {
+                return res.status(404)
+                    .json({ message: 'A user with that id does not exist.  Please enter another id.' })
+            }
+            res.json(user);
+        } catch (err) {
+            res.status(500).json(err);
         }
-        res.json(user);
     },
     async createUser(req, res) {
-        const newUser = await User.create(req.body);
-        res.json(newUser);
+        try {
+            const newUser = await User.create(req.body);
+            res.json(newUser);
+
+        } catch (err) {
+            res.status(500).json(err);
+        }
     },
     async updateUser(req, res) {
-        const { id } = req.params;
-        const user = await User.findOneAndUpdate(
-            { _id: id },
-            { $set: req.body },
-            { runValidators: true, new: true }
-        )
+        try {
+            const { id } = req.params;
+            const user = await User.findOneAndUpdate(
+                { _id: id },
+                { $set: req.body },
+                { runValidators: true, new: true }
+            );
 
-        if (!user) {
-            return res.status(404)
-            .json({message: 'A user with that id does not exist.  Please enter another id.'})
+            if (!user) {
+                return res.status(404).json({ message: 'A user with this id does not exist.  Please select an exisiting user.' });
+            };
+
+            res.json(user);
+
+        } catch (err) {
+            res.status(500).json(err);
         }
-
-        res.json(user);
     },
     async deleteUser(req, res) {
-        const { id } = req.params;
-        const user = await User.findOneAndDelete({ _id: id });
-        res.json({message: 'User deleted from the database.'});
+        try {
+            const { id } = req.params;
+            const user = await User.findOneAndDelete({ _id: id });
+
+            if (!user) {
+                return res.status(404).json({ message: 'A user with this id does not exist.  Please select an exisiting user.' })
+            }
+
+            res.json({ message: 'User deleted from the database.' });
+
+        } catch (err) {
+            res.status(500).json(err)
+        }
     },
     async addFriend(req, res) {
-        const { id } = req.params;
-        const user = await User.findOneAndUpdate(
-            { _id: id },
-            { $addToSet: { friends: req.body }},
-            { runValidators: true, new: true }
-        );
+        try {
+            const { id } = req.params;
+            const user = await User.findOneAndUpdate(
+                { _id: id },
+                { $addToSet: { friends: req.body } },
+                { runValidators: true, new: true }
+            );
 
-        res.json(user);
+            res.json(user);
+
+        } catch (err) {
+            res.status(500).json(err);
+        }
     },
     async removeFriend(req, res) {
-        const { userId, friendId } = req.params;
-        const user = await User.findOneAndUpdate(
-            { _id: userId },
-            { $pull: { friends: friendId } },
-            { runValidators: true, new: true }
-        )
+        try {
+            const { userId, friendId } = req.params;
+            const user = await User.findOneAndUpdate(
+                { _id: userId },
+                { $pull: { friends: friendId } },
+                { runValidators: true, new: true }
+            )
 
-        res.json(user)
+            res.json(user)
+
+        } catch (err) {
+            res.status(500).json(err);
+        }
     }
 }
