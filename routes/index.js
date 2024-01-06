@@ -11,8 +11,12 @@ router.use('/api', apiRoutes);
 //     res.status(200).send(`Thanks for visiting!`);
 // });
 
-router.use((req, res) => {
-    res.send('Invalid route');
-})
+router.use((err, req, res) => {
+    console.log('****************************');
+    console.log('**********ERROR*************');
+    console.log('****************************');
+    console.log(err);
+    // res.status(404).send('Invalid route');
+});
 
 module.exports = router;
