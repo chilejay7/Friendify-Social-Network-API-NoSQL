@@ -6,17 +6,12 @@ const apiRoutes = require('./api');
 // Defines the route to be used with the apiRoutes.
 router.use('/api', apiRoutes);
 
-// router.get('/', (req, res) => {
-//     console.log('The routes are working');
-//     res.status(200).send(`Thanks for visiting!`);
-// });
-
-router.use((err, req, res) => {
+router.use((req, res) => {
+    const { status = 500, message = 'Something went wrong' } = err;
     console.log('****************************');
     console.log('**********ERROR*************');
     console.log('****************************');
-    console.log(err);
-    // res.status(404).send('Invalid route');
+    res.status(status).send(message);
 });
 
 module.exports = router;
