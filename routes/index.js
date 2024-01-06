@@ -7,11 +7,10 @@ const apiRoutes = require('./api');
 router.use('/api', apiRoutes);
 
 router.use((req, res) => {
-    const { status = 500, message = 'Something went wrong' } = err;
     console.log('****************************');
     console.log('**********ERROR*************');
     console.log('****************************');
-    res.status(status).send(message);
+    res.status(500).json({ message: 'Something went wrong.  Please try a different route.'});
 });
 
 module.exports = router;
