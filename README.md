@@ -19,7 +19,7 @@ The Friendify social networking application allows end users to share their thou
     
 ## Installation
 
-The Friendify application can be installed by cloning the repository to your local machine.  Please note, `Node.js` is required in order to run this application and will need to be installed before attempting to run the program.  The package dependencies are included within the package.json file and can be installed through a simple `npm i` command once the repository has been successfully cloned on the local computer.  The `mongoose` and `express` modules are required for this application to run correctly and must be installed prior to starting the server.  The `schema.sql` file will create the database when sourced through mysql.  The seeds can be created through node using the `node ./seeds/index.js` command.
+The Friendify application can be installed by cloning the repository to your local machine.  Please note, `Node.js` is required in order to run this application and will need to be installed before attempting to run the program.  The package dependencies are included within the package.json file and can be installed through a simple `npm i` command once the repository has been successfully cloned on the local computer.  The `mongoose` and `express` modules are required for this application to run correctly and must be installed prior to starting the server.
 
 ## Usage
 
