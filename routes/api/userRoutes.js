@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getUsers, getOneUser, createUser, updateUser, deleteUser, addFriend, removeFriend } = require('../../controllers/userController');
+const { getUsers, getOneUser, createUser, updateUser, deleteUser, addFriend, removeFriend, addThought } = require('../../controllers/userController');
 
 // This route uses a find query to retrieve all users in the database.
 router.route('/')
@@ -19,5 +19,8 @@ router.route('/:id/friends')
 // This route was added to remove friends from a user's friends list arrray.
 router.route('/:userId/friends/:friendId')
 .delete(removeFriend);
+
+// This route allows for thoughts to be addd to a user's array.
+router.route('/:userId/thoughts/:thoughtId').post(addThought);
 
 module.exports = router;
