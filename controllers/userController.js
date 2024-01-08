@@ -103,5 +103,21 @@ module.exports = {
         } catch (err) {
             res.status(500).json(err);
         }
-    }
+    },
+    // This route has been created to associate thoughts with a specific user.
+    async addThought(req, res) {
+        try {
+            const { userId, thoughtId } = req.params;
+            const user = await User.findOneAndUpdate(
+                { _id: userId },
+                { $addToSet: { thoughts: thoughtId } },
+                { runValidators: true, new: true }
+            );
+
+            res.json(user);
+
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
 }

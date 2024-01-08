@@ -1,4 +1,5 @@
 const Thought = require('../models/Thought');
+const User = require('../models/User');
 
 module.exports = {
     // The find() method returns all documents in a given collection.
@@ -50,7 +51,20 @@ module.exports = {
         try {
             const { id } = req.params;
             const thought = await Thought.findOneAndDelete({ _id: id });
+
+            if (!thought) {
+                return res.status(404).json({ message: 'No thought with this id exists.  Please provide a valid thought id.'})
+            };
+
+            // This expression uses the $pull operator to remove the thought being deleted from an associated user.
+            const user = await User.findOneAndUpdate(
+                {thoughts: id },
+                { $pull: { thoughts: id } },
+                { new: true }
+            );
+
             res.json({ message: 'Thought deleted from the database.' })
+
         } catch (err) {
             res.status(500).json(err);
         }
