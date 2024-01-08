@@ -29,6 +29,8 @@ Data can be seeded by using the `node ./utils/seeds.js` command in the terminal.
 
 The application is initialized by running the `node server.js` command through the terminal.  When the `server.js` file is called, it syncs the MongoDB database through mongoose and starts the express application, listening on port 7075.  Requests can be sent to the application using the routes defined within the `routes/api` directory using the following syntax: `localhost:7075/api/<route name>`.  The routes that can be queried are: `api/thoughts` and `api/users`.  Requests can be sent through an application such as Insomnia or Postman to retrieve related data from the database.  Each endpoint has a `GET`, `POST`, `PUT`, and `DELETE` endpoint defined.  The `GET` endpoint will use a find method to retrieve all documents from the given collection if no id is specified.  If an id is given as an additional parameter through the GET request, the individual document pertaining to that id will be retrieved.
 
+Bonus: The ability to add thoughts to a user's array and remove the thought when deleted is included in the application.  The /api/users/:userId/thoughts/thoughtId route allows for thoughts to be associated with a specific user.  The $pull operator is used in the thought delete route to query the database and find the user's document containing the specific _id of the thought being deleted.
+
 A link to the video demonstrating the application's use can be found here: [Walk-through Video](https://drive.google.com/file/d/1cLFRmF_TB6ei2AEgiNFzbxYYty4w9wO2/view)
 
 ## License
