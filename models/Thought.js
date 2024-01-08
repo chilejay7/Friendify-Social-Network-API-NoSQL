@@ -15,7 +15,8 @@ const thoughtSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
+        get: (date) => date.toLocaleString(),
     },
     username: {
         type: String,
@@ -24,6 +25,7 @@ const thoughtSchema = new Schema({
     reactions: [reactionSchema],
 },
 {
+    tiemstamps: true,
     toJSON: {
       getters: true,
     },
